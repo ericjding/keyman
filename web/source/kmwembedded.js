@@ -202,13 +202,13 @@
       rowHeight = rowHeight/window.devicePixelRatio;
     
     oskHeight=nRows*rowHeight;
-
+console.log('kmwembedded: nRows: ' + nRows + '; rowHeight: ' + rowHeight + '; oskHeight: ' + oskHeight);
     var b=osk._Box,bs=b.style;
     bs.height=bs.maxHeight=(oskHeight+3)+'px';
     b=b.firstChild.firstChild; bs=b.style;
     bs.height=bs.maxHeight=(oskHeight+3)+'px';
     if(device.formFactor == 'phone') fs = 0.65;
-    pad = Math.round(0.15*rowHeight);
+    pad = Math.ceil(0.15*rowHeight);
 
     bs.fontSize=fs+'em';  
     var resizeLabels=(device.OS == 'iOS' && device.formFactor == 'phone' && util.landscapeView());
@@ -232,7 +232,7 @@
           ks=key.childNodes[j].style;
           ks.bottom=rs.bottom; 
           ks.height=ks.minHeight=(rowHeight-pad)+'px'; 
-                          
+if (nKey == 0) console.log('kmwembedded: ks.height: ' + ks.height + '; pad: ' + pad);
           // Rescale keycap labels on iPhone (iOS 7)
           if(resizeLabels && (j > 0)) key.childNodes[0].style.fontSize='6px'; 
         }
