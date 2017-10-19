@@ -2220,7 +2220,9 @@ public final class KMManager {
     @JavascriptInterface
     public int getKeyboardHeight() {
       int kbHeight = context.getResources().getDimensionPixelSize(R.dimen.keyboard_height);
+Log.d("KMM", "kbHeight was: " + kbHeight);
       kbHeight -= kbHeight % 20;
+Log.d("KMM", "kbHeight now: " + kbHeight);
       return kbHeight;
     }
 
@@ -2229,6 +2231,7 @@ public final class KMManager {
     public int getKeyboardWidth() {
       DisplayMetrics dms = context.getResources().getDisplayMetrics();
       int kbWidth = (int) (dms.widthPixels / dms.density);
+      Log.d("KMM", "dms.widthPixels: " + dms.widthPixels + " dms.density" + dms.density + " kbWidth: " + kbWidth);
       return kbWidth;
     }
 

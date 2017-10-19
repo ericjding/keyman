@@ -196,19 +196,25 @@
         nRows=layers[0].childNodes.length,
         oskHeight=osk.getHeight(),
         rowHeight=Math.floor(oskHeight/nRows),
-        nLayer,nRow,rs,keys,nKeys,nKey,key,ks,j,pad=4,fs=1.0;
-        
-    if(device.OS == 'Android' && 'devicePixelRatio' in window) 
-      rowHeight = rowHeight/window.devicePixelRatio;
+        pad = Math.ceil(0.15*rowHeight),
+        nLayer,nRow,rs,keys,nKeys,key,ks,j,fs=1.0;
+
+    console.log('kmwembedded initial: nRows: ' + nRows + '; oskHeight: ' + oskHeight + '; rowHeight: ' + rowHeight);
+
+    if(device.OS == 'Android' && 'devicePixelRatio' in window) {
+        console.log('adjusting rowHeight for devicePixelRatio: ' + window.devicePixelRatio);
+        rowHeight = rowHeight / window.devicePixelRatio;
+    }
     
     oskHeight=nRows*rowHeight;
-console.log('kmwembedded: nRows: ' + nRows + '; rowHeight: ' + rowHeight + '; oskHeight: ' + oskHeight);
+
+    console.log('kmwembedded now: nRows: ' + nRows + '; oskHeight: ' + oskHeight + '; rowHeight: ' + rowHeight);
+
     var b=osk._Box,bs=b.style;
     bs.height=bs.maxHeight=(oskHeight+3)+'px';
     b=b.firstChild.firstChild; bs=b.style;
     bs.height=bs.maxHeight=(oskHeight+3)+'px';
     if(device.formFactor == 'phone') fs = 0.65;
-    pad = Math.ceil(0.15*rowHeight);
 
     bs.fontSize=fs+'em';  
     var resizeLabels=(device.OS == 'iOS' && device.formFactor == 'phone' && util.landscapeView());
@@ -223,7 +229,7 @@ console.log('kmwembedded: nRows: ' + nRows + '; rowHeight: ' + rowHeight + '; os
         rs.maxHeight=rs.height=rowHeight+'px';      
         keys=layers[nLayer].childNodes[nRow].childNodes;
         nKeys=keys.length;     
-        for(nKey=0;nKey<nKeys;nKey++)
+        for(var nKey=0;nKey<nKeys;nKey++)
         {                      
           key=keys[nKey];
           // Must set the height of the text DIV, not the label (if any)
@@ -232,7 +238,7 @@ console.log('kmwembedded: nRows: ' + nRows + '; rowHeight: ' + rowHeight + '; os
           ks=key.childNodes[j].style;
           ks.bottom=rs.bottom; 
           ks.height=ks.minHeight=(rowHeight-pad)+'px'; 
-if (nKey == 0) console.log('kmwembedded: ks.height: ' + ks.height + '; pad: ' + pad);
+if (nKey == 0) console.log('kmwembedded: ks.height: ' + ks.height + '; ks.bottom: ' + ks.bottom + '; pad: ' + pad);
           // Rescale keycap labels on iPhone (iOS 7)
           if(resizeLabels && (j > 0)) key.childNodes[0].style.fontSize='6px'; 
         }
