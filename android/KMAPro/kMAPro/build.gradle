@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.triplet.play'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.1"
     playAccountConfigs {
         defaultAccountConfig {
             if (project.hasProperty("keys_json_file")) {
@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "com.tavultesoft.kmapro"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
 
         //dumpProperties(project.ext) // Use this to dump all external properties for debugging TeamCity integration
 
@@ -85,7 +85,7 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:25.4.0'
+    implementation 'com.android.support:support-v4:27.0.1'
     api (name: 'keyman-engine', ext: 'aar')
 }
 
