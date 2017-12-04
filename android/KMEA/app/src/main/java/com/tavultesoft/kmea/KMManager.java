@@ -1075,7 +1075,11 @@ public final class KMManager {
             JSONParser jsonParser = new JSONParser();
             JSONObject customKb = null;
             if (isDirect) {
-              customKb = jsonParser.getJSONObjectFromUrl(jsonUrl);
+              if (jsonUrl.endsWith(".kmp")) {
+
+              } else {
+                customKb = jsonParser.getJSONObjectFromUrl(jsonUrl);
+              }
             } else {
               String deviceType = context.getResources().getString(R.string.device_type);
               if (deviceType.equals("AndroidTablet")) {
